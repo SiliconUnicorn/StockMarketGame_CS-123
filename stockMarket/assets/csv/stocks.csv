@@ -1,10 +1,18 @@
-Stocks,Real Name,Category,Initial Price per Share
-APPL,Apple,Tech,$0.99
-FB,Meta Corp.,Tech,$12.50
-GOOGL,Alphabet,Tech,$50.83
-TGT,Target,Retail,$32.73
-WMT,Walmart,Retail,$14.32
-AMZN,Amazon,Retail,$9.08
-PFE,Pfizer,Pharmaceuticals,$4.83
-RTX,Raytheon,Military Contracting,$9.49
-MRNA,Moderna,Pharmaceuticals,$11.26
+Stocks,Real Name,Category,Initial Price per Share,IPO
+APPL,Apple,Tech,$0.35,1990
+FB,Meta Corp.,Tech,$12.50,2012
+GOOGL,Alphabet,Tech,$0.00,2004
+TGT,Target,Retail,$32.73,1990
+TM,Toyota,Tech,$20.78,1990
+,starbucks,Consumer,$0.38,1990
+AWK,American Water Works Company Inc,Utilities,$15.56,1990
+XOM,ExxonMobil,Utilities,$12.02,1990
+PFE,Pfizer,Healthcare,$0.91,1990
+CI,Cigna,Healthcare,$3.59,1990
+BAC,Bank of America,Financial,$3.67,1990
+JPM,JPMorgan,Financial,$2.93,1990
+NFLX,Netflix,Consumer,$0.00,2002
+WMT,Walmart,Retail,$14.32,1990
+AMZN,Amazon,Retail,$9.08,1997
+RTX,Raytheon,Military Contracting,$9.49,1990
+MRNA,Moderna,Pharmaceuticals,$11.26,2018
