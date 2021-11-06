@@ -5,9 +5,9 @@ Date: 5 Nov 2021
 Author(s): Arnika
 """
 
-
 import numpy as np
 import matplotlib.pyplot as plt
+
 
 def stock(start_price):
     """Takes in the the starting price of a stock as an input, and generates a randomized graph representing the 
