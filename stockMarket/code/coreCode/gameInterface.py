@@ -3,7 +3,7 @@ import tkinter as tk
 class BasicGUI:
     def __init__(self): # consttruter to create instance of the class
         self.rootWin = tk.Tk()
-        self.rootWin.config(background= "Blue")
+        self.rootWin.config(background= "Green")
         self.rootWin.title("blue is beautiful")
         self.testButton = tk.Button(self.rootWin)
         self.testButton["text"] = "Quit"
