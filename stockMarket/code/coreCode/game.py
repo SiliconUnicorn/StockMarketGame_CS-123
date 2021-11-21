@@ -14,6 +14,15 @@ class Game:
         self.userPortfolio = Portfolio()
         self.maxTurnNumber = 30
 
+    def updateTurn(self):
+        '''Updates the game to begin a new turn.'''
+        self.currentTurnNumber += 1
+        if self.currentTurnNumber >= self.maxTurnNumber:
+            if self.userPortfolio.userCash > 1000.00:
+                self.userWins()
+            else:
+                self.userLoses()
+
     def userWins(self):
         '''Lets the user know they have won.'''
         print("You have won!")
@@ -21,3 +30,8 @@ class Game:
     def userLoses(self):
         '''Lets the user know they have lost.'''
         print("You have lost!")
+
+    def play(self):
+        '''Play the game'''
+        for turn in range(self.maxTurnNumber):
+            self.updateTurn()
