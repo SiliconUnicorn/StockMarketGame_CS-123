@@ -10,3 +10,7 @@ class Portfolio:
         self.userCash = 100.00
         self.playerID = "Human Player"
         # self.ownedStocks = {100: Stock("AAPL")} (Uncomment once stock class exists.
+
+    def getCashValue(self):
+        '''Calculates the cash value of the portfolio'''
+        return self.userCash
