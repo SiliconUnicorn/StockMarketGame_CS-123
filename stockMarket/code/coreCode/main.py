@@ -7,6 +7,7 @@ Author(s): Micah Hansonbrook
 
 from turnUpdater import *
 from stockMarket.code.stockMarket.getStocks import *
+from stockMarket.code.coreCode.gameInterface import *
 
 def main():
     '''
@@ -16,6 +17,8 @@ def main():
     stocks = getStocks()
     for turn in range(31):
         stocks = turnUpdater(turn, stocks)
+    myGUI = BasicGUI()
+    myGUI.run()
 
 if __name__ == "__main__":
     main()
