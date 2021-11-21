@@ -15,10 +15,7 @@ class Stock:
         self.category = category
         self.valueHistory = valueHistory
 
-        self.stocksList = {}
-        self.stocksList = {self.name: [self.currentValue]}
-
     def updateStock(self, marketValue, categoryValue, additionalValue):
         marketChange = marketValue + categoryValue + additionalValue + random.Random(50)
         self.currentValue = self.currentValue + marketChange
-        self.stocksList[self.name] = self.currentValue
+        self.valueHistory[self.name] = self.currentValue
