@@ -6,16 +6,16 @@ Author(s): Micah Hansonbrook
 '''
 
 from turnUpdater import *
-from stockMarket.code.stockMarket.getStocks import *
 from stockMarket.code.events.getEvents import *
 from stockMarket.code.coreCode.gameInterface import *
+from stockMarket.code.stockMarket.getAllStocks import *
 
 def main():
     '''
     The main function of the program
     :return: None
     '''
-    stocks = getStocks()
+    stocks = getAllStocks()
     events = getEvents()
     for turn in range(31):
         stocks = turnUpdater(turn, stocks)

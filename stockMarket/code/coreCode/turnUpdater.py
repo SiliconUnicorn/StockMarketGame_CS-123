@@ -17,7 +17,8 @@ def turnUpdater(turnNumber, stocks):
         print("Current Stocks: " + str(stocks))
     else:
         for stock in stocks:
-            stock['Initial Price per Share'] = float(stock['Initial Price per Share']) * 1.07
+            stock.valueHistory.append(stock.currentValue)
+            stock.currentValue = float(stock.currentValue) * 1.07
         print("Turn " + str(turnNumber) + ":")
         print("Current Stocks: " + str(stocks))
     return stocks
