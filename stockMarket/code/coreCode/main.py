@@ -21,7 +21,7 @@ def main():
     portfolio = Portfolio()
     for turn in range(31):
         stocks = turnUpdater(turn, stocks, events, portfolio)
-    myGUI = BasicGUI()
+    myGUI = GameGUI()
     myGUI.run()
 
 if __name__ == "__main__":

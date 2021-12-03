@@ -5,7 +5,7 @@ Date: 3 Dec 2021
 Author(s): Micah Hansonbrook
 '''
 
-from stockMarket.code.stockMarket.stock import *
+from stockMarket.code.stockMarket.classStock import *
 from stockMarket.code.stockMarket.getStocks import *
 
 def getAllStocks():

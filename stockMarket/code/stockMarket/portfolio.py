@@ -5,7 +5,7 @@ Date: 21 Nov 2021
 Author(s): Micah Hansonbrook
 '''
 
-from stockMarket.code.stockMarket.stock import *
+from stockMarket.code.stockMarket.classStock import *
 from stockMarket.code.stockMarket.getAllStocks import *
 
 class Portfolio:
