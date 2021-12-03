@@ -1,0 +1,18 @@
+"""
+File: stockMarket_main.py
+Project: Stock Market Game
+Date: 21 Nov 2021
+Author(s): Arnika
+"""
+
+import random
+
+
+class StockMarket:
+    def __init__(self, stock, pastEvents, currentEvents, futureEventPool):
+        self.stock = stock
+        self.pastEvents = pastEvents
+        self.currentEvents = currentEvents
+        self.futureEventPool = futureEventPool
+
+# in progress
