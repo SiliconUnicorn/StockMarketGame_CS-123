@@ -2,7 +2,7 @@
 File: classStock.py
 Project: Stock Market Game
 Date: 21 Nov 2021
-Author(s): Arnika Abeysekera
+Author(s): Arnika, Tina
 """
 
 import random
