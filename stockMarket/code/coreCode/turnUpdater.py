@@ -5,11 +5,12 @@ Date: 6 Nov 2021
 Author(s): Micah Hansonbrook
 '''
 
-def turnUpdater(turnNumber, stocks):
+def turnUpdater(turnNumber, stocks, events):
     '''
     This will update the code for a new turn
     :param turnNumber: The current turn number
     :param stocks: The current stock data
+    :param events: The current events pool.
     :return: Stocks data
     '''
     if turnNumber == 0:

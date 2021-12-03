@@ -16,9 +16,9 @@ def main():
     :return: None
     '''
     stocks = getAllStocks()
-    events = getEvents()
+    events = getAllEvents()
     for turn in range(31):
-        stocks = turnUpdater(turn, stocks)
+        stocks = turnUpdater(turn, stocks, events)
     myGUI = BasicGUI()
     myGUI.run()
 

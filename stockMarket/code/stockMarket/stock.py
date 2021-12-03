@@ -6,7 +6,6 @@ Author(s): Arnika, Tina
 """
 
 import random
-from stockMarket.code.stockMarket.getStocks import *
 
 class Stock:
     def __init__(self, name, currentValue, category):
