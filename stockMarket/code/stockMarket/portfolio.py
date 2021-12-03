@@ -22,3 +22,7 @@ class Portfolio:
         for stock in currentStocks:
             accumulator += float(stock.currentValue) * float(self.ownedStocks[stock.name])
         return self.userCash + accumulator
+
+    def getStockValue(self, stock):
+        '''Calculates the cash value of the stock in the portfolio'''
+        return float(stock.currentValue) * float(self.ownedStocks[stock.name])
