@@ -7,7 +7,7 @@ Author(s): Micah Hansonbrook
 
 from stockMarket.code.coreCode.eventInterface import *
 
-def turnUpdater(turnNumber, stocks, events):
+def turnUpdater(turnNumber, stocks, events, portfolio):
     '''
     This will update the code for a new turn
     :param turnNumber: The current turn number
@@ -24,6 +24,7 @@ def turnUpdater(turnNumber, stocks, events):
             stock.currentValue = float(stock.currentValue) * 1.07
         print("Turn " + str(turnNumber) + ":")
         print("Current Stocks: " + str(stocks))
+    portfolio.getCashValue(stocks)
     ui = eventsExample()
     ui.run()
     return stocks

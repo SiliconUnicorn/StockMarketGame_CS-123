@@ -6,16 +6,19 @@ Author(s): Micah Hansonbrook
 '''
 
 from stockMarket.code.stockMarket.stock import *
+from stockMarket.code.stockMarket.getAllStocks import *
 
 class Portfolio:
-    def __init__(self, stocks):
+    def __init__(self):
         self.userCash = 100.00
         self.playerID = "Human Player"
         self.ownedStocks = {}
+        for stock in getAllStocks():
+            self.ownedStocks[stock.name] = 0
 
-        for stock in stocks:
-            self.ownedStocks[0:Stock(stock['Real Name'], stock['Initial Price per Share'], stock['category'], {})]
-
-    def getCashValue(self):
+    def getCashValue(self, currentStocks):
         '''Calculates the cash value of the portfolio'''
-        return self.userCash
+        accumulator = 0
+        for stock in currentStocks:
+            accumulator += float(stock.currentValue) * float(self.ownedStocks[stock.name])
+        return self.userCash + accumulator
