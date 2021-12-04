@@ -25,11 +25,22 @@ class HelpInterface:
         self.scroll.grid(column=1, row=2)
         self.scroll.insert(1.0, "This is some really fancy placeholder text right here!")
 
+        self.button = tk.Button(self.rootWin)
+        self.button.grid(column=1, row=3)
+        self.button['text'] = 'Close'
+        self.button['command'] = self.closeWindow
+
     def run(self):
         '''
         Runs the interface's main loop
         '''
         self.rootWin.mainloop()
+
+    def closeWindow(self):
+        '''
+        Closes the window.
+        '''
+        self.rootWin.destroy()
 
 if __name__ == "__main__":
     interface = HelpInterface()
