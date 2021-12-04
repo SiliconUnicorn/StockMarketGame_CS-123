@@ -23,7 +23,7 @@ class HelpInterface:
 
         self.scroll = sTk.ScrolledText(self.rootWin)
         self.scroll.grid(column=1, row=2)
-        self.scroll.insert(1.0, "This is some really fancy placeholder text right here!")
+        self.scroll.insert(1.0, """\tIn real life, the stock market allows individuals to trade shares of large corporations. Every quarter, shareholders either receive a portion of corporate profits, or pay a portion of corporate losses.""")
 
         self.button = tk.Button(self.rootWin)
         self.button.grid(column=1, row=3)
