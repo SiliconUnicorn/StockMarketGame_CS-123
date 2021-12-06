@@ -34,6 +34,7 @@ class eventsExample:
 
 
 if __name__ == "__main__":
+
     # Main program:
     eventGui = eventsExample()
     eventGui.run()
