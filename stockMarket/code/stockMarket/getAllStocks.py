@@ -12,10 +12,10 @@ def getAllStocks():
     '''
     Loads all stocks into the game, and returns a list of stocks using the stock class
     '''
-    accumulator = []
+    accumulator = {}
     for value in getStocks():
         newStock = Stock(value["Real Name"], value["Initial Price per Share"], value["Category"])
-        accumulator.append(newStock)
+        accumulator[value["Real Name"]] =newStock
     return accumulator
 
 

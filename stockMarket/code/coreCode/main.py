@@ -16,11 +16,11 @@ def main():
     The main function of the program
     :return: None
     '''
-    # stocks = getAllStocks()
-    # events = getAllEvents()
-    # portfolio = Portfolio()
-    # for turn in range(31):
-    #     stocks = turnUpdater(turn, stocks, events, portfolio)
+    stocks = getAllStocks()
+    events = getAllEvents()
+    portfolio = Portfolio()
+    for turn in range(31):
+        stocks = turnUpdater(turn, stocks, events, portfolio)
     myGUI = GameGUI()
     myGUI.run()
 

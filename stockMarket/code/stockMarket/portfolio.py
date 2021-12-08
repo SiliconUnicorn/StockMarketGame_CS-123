@@ -13,8 +13,9 @@ class Portfolio:
         self.userCash = 100.00
         self.playerID = "Human Player"
         self.ownedStocks = {}
-        for stock in getAllStocks():
-            self.ownedStocks[stock.name] = 0
+        stocks = getAllStocks()
+        for stock in stocks:
+            self.ownedStocks[stocks[stock].name] = 0
 
     def getCashValue(self, currentStocks):
         '''Calculates the cash value of the portfolio'''
