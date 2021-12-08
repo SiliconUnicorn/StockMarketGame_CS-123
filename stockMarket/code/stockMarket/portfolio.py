@@ -27,3 +27,20 @@ class Portfolio:
     def getStockValue(self, stock):
         '''Calculates the cash value of the stock in the portfolio'''
         return float(stock.currentValue) * float(self.ownedStocks[stock.name])
+
+    def confirmUserPurchasable(self, stock, shares):
+        '''
+        Checks to see whether or not a user has enough cash to make a stock purchase, and returns True if it does work
+        '''
+        return self.userCash > shares * stock.currentValue
+
+
+    def changeStock(self, stock, shares):
+        '''Adjusts the number of stocks owned by this player's portfolio'''
+        if self.confirmUserPurchasable(stock, shares):
+            name = stock.name
+            self.ownedStocks[name] += shares
+            self.userCash += shares * stock.currentValue
+        else:
+            'This should never happen. Confirm that user can purchase stocks before making purchase'
+            assert 0 == 1
