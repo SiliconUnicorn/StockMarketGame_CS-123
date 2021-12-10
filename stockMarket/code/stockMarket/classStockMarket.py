@@ -6,11 +6,12 @@ Author(s): Arnika
 """
 
 import random
-
+from stockMarket.code.stockMarket.getAllStocks import *
+from stockMarket.code.events.getEvents import *
 
 class StockMarket:
-    def __init__(self, stock, pastEvents, currentEvents, futureEventPool):
-        self.stock = stock
+    def __init__(self, stocks, pastEvents, currentEvents, futureEventPool):
+        self.stocks = stocks
         self.pastEvents = pastEvents
         self.currentEvents = currentEvents
         self.futureEventPool = futureEventPool
@@ -19,23 +20,20 @@ class StockMarket:
         stockChanges = {}
         stocks = {}
         marketChange = float(random.randint(-2, 6))/100
-        for stock in stocks: # Change Here
+        for stock in getStockList(): # Change Here
             stockChanges[stock.category] = float(random.randint(-1, 5))/100
             stockChanges[stock.name] = 0
-        for event in self.currentEvents:
-            stockChanges[event.category] *= 10000 * event.effect
+        # for event in self.currentEvents:
+        #     stockChanges[event.category] *= 10000 * event.effect
 
-        for stock in stocks: # Change Here
+        for stock in getStockList(): # Change Here
             stock.updateStock(marketChange, stockChanges[stock.category], 0) # Maybe change this later?
 
     def updateEvents(self):
         self.pastEvents.append(self.currentEvents)
         self.currentEvents.clear()
-        tempEvents = random.choices(self.futureEventPool, k=3)
-        for tempEvents in self.futureEventPool:
-            tempEvents.clear()
-        self.currentEvents.append(tempEvents)
-
-
+        self.currentEvents = random.choices(self.futureEventPool, k=1)
+        self.currentEvents.append(self.currentEvents[0].generateDynamicEvent())
+        self.currentEvents.append(self.currentEvents[0].generateDynamicEvent())
 
 

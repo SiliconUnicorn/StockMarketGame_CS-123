@@ -20,23 +20,26 @@ class GameGUI:
         stocks = getAllStocks()
         events = getAllEvents()
         portfolio = Portfolio()
-        market = StockMarket(getAllStocks(), [], [], getAllEvents())
+        self.market = StockMarket(getAllStocks(), [], [], getAllEvents())
 
-        market.updateEvents()
+        self.market.updateEvents()
 
         self.currentTurnNumber = 0
 
         self.eventText = tk.Label(self.rootWin, text="None")
         self.eventText.grid(row=3, column=8)
 
-        self.button1 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[0]), text=market.currentEvents[0].name)
+        self.button1 = tk.Button(self.rootWin, command=partial(self.eventResponse, self.market.currentEvents[0]), text=self.market.currentEvents[0].name)
         self.button1.grid(row=0, column=8)
 
-        self.button2 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[1]), text=market.currentEvents[1].name)
+        self.button2 = tk.Button(self.rootWin, command=partial(self.eventResponse, self.market.currentEvents[1]), text=self.market.currentEvents[1].name)
         self.button2.grid(row=1, column=8)
 
-        self.button3 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[2]), text=market.currentEvents[2].name)
+        self.button3 = tk.Button(self.rootWin, command=partial(self.eventResponse, self.market.currentEvents[2]), text=self.market.currentEvents[2].name)
         self.button3.grid(row=2, column=8)
+
+        self.nextTurnButton = tk.Button(self.rootWin, command=self.nextTurn, text='Next Turn >')
+        self.nextTurnButton.grid(row=0, column=0)
 
         row = 2
         for i in portfolio.ownedStocks:
@@ -86,6 +89,17 @@ class GameGUI:
     def getCurrentYear(self):
         '''Returns the current year in the game'''
         return self.currentTurnNumber + 1990
+
+    def nextTurn(self):
+        '''Begins the next turn of the game.'''
+        self.market.updateEvents()
+        self.market.updateStocks()
+        self.button1['text'] = self.market.currentEvents[0].name
+        self.button1['command'] = partial(self.eventResponse, self.market.currentEvents[0])
+        self.button2['text'] = self.market.currentEvents[1].name
+        self.button2['command'] = partial(self.eventResponse, self.market.currentEvents[1])
+        self.button3['text'] = self.market.currentEvents[2].name
+        self.button2['command'] = partial(self.eventResponse, self.market.currentEvents[2])
 
 #  if we have a function that handles events for the quarter, it will:
     # choose a random event from the list
