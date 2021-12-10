@@ -112,7 +112,7 @@ class GameGUI:
         self.button2['text'] = self.market.currentEvents[1].name
         self.button2['command'] = partial(self.eventResponse, self.market.currentEvents[1])
         self.button3['text'] = self.market.currentEvents[2].name
-        self.button2['command'] = partial(self.eventResponse, self.market.currentEvents[2])
+        self.button3['command'] = partial(self.eventResponse, self.market.currentEvents[2])
 
     def open_HelpInterface(self):
         """ opens the help interface when "Need Help?" is clicked """
