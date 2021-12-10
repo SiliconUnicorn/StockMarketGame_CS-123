@@ -17,6 +17,7 @@ from functools import partial
 
 class GameGUI:
     def __init__(self): # construter to create instance of the class
+        self.helpResponse = None
         self.rootWin = tk.Tk()
         stocks = getAllStocks()
         events = getAllEvents()
@@ -43,6 +44,7 @@ class GameGUI:
         self.nextTurnButton.grid(row=0, column=0)
 
         row = 2
+
         for i in portfolio.ownedStocks:
             myLabel = tk.Label(self.rootWin, text = i)
             myLabel.grid(row = row, column = 1, padx=2, pady=2)
@@ -53,7 +55,7 @@ class GameGUI:
             totalStock =  portfolio.ownedStocks[i] * portfolio.getStockValue(stocks[i])
             totalValueLabel = tk.Label(self.rootWin, text=totalStock )
             totalValueLabel.grid(row=row, column=4, padx=2, pady=2)
-            #totalStock.
+
 
             buyButton = tk.Button(self.rootWin, command = partial(self.buyResponse, portfolio, i, numStocksLabel, stockValLabel, totalValueLabel))
             buyButton["text"] = "buy"
@@ -79,16 +81,19 @@ class GameGUI:
         helpButton.grid(row=0, column=10, padx=5, pady=0)
 
     def buyResponse(self, port, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
+        """ makes it so when you click the buy button the number of shares goes up"""
         port.ownedStocks[stock_name] += 1
         numSharesLabl["text"] = str(port.ownedStocks[stock_name])
         totalValLabl["text"] =  str(int( numSharesLabl["text"]) * float( shareValueLabl["text"]))
 
 
     def sellResponse(self, port, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
+        """makes it so when you click sell the number of shares goes down but doesn't allow it to go past zero """
         if port.ownedStocks[stock_name] > 0:
             port.ownedStocks[stock_name] -= 1
             numSharesLabl["text"] = str(port.ownedStocks[stock_name])
             totalValLabl["text"] = str(int(numSharesLabl["text"]) * float(shareValueLabl["text"]))
+
 
     def eventResponse(self, event):
         '''Responds when an event button is pressed by the user'''
@@ -128,14 +133,11 @@ class GameGUI:
         self.rootWin.mainloop()
 
 
-    def testButtonResponse(self):
-        pass
+
 
 
 
 
 if __name__ == "__main__":
     myGUI = GameGUI()
-    print("b4 calling run")
     myGUI.run()
-    print("after calling run")
