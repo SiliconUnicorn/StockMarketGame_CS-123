@@ -15,7 +15,14 @@ def getAllStocks():
     accumulator = {}
     for value in getStocks():
         newStock = Stock(value["Real Name"], value["Initial Price per Share"], value["Category"])
-        accumulator[value["Real Name"]] =newStock
+        accumulator[value["Real Name"]] = newStock
     return accumulator
 
 
+def getStockList():
+    '''Generates a list containing every single stock.'''
+    accumulator = []
+    for value in getStocks():
+        newStock = Stock(value["Real Name"], value["Initial Price per Share"], value["Category"])
+        accumulator.append(newStock)
+    return accumulator
