@@ -15,8 +15,7 @@ class StockMarket:
         self.currentEvents = currentEvents
         self.futureEventPool = futureEventPool
 
-    def updateStocks(self, events):
-        #-0.01-0.05
+    def updateStocks(self):
         stockChanges = {}
         stocks = {}
         marketChange = float(random.randint(-2, 6))/100
@@ -29,10 +28,14 @@ class StockMarket:
         for stock in stocks: # Change Here
             stock.updateStock(marketChange, stockChanges[stock.category], 0) # Maybe change this later?
 
-
     def updateEvents(self):
         self.pastEvents.append(self.currentEvents)
-        self.currentEvents = ""
+        self.currentEvents.clear()
+        tempEvents = random.choices(self.futureEventPool, k=3)
+        for tempEvents in self.futureEventPool:
+            tempEvents.clear()
+        self.currentEvents.append(tempEvents)
+
 
 
 
