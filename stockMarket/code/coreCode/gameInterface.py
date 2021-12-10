@@ -20,8 +20,16 @@ class GameGUI:
         events = getAllEvents()
         portfolio = Portfolio()
 
+        button1 = tk.Button(self.rootWin, text=events[0].generateDynamicEvent().name)
+        button1.grid(row=0, column=2)
 
-        row = 0
+        button2 = tk.Button(self.rootWin, text=events[0].name)
+        button2.grid(row=0, column=3)
+
+        button3 = tk.Button(self.rootWin, text=events[0].generateDynamicEvent().name)
+        button3.grid(row=0, column=4)
+
+        row = 2
         for i in portfolio.ownedStocks:
             myLabel = tk.Label(self.rootWin, text = i)
             myLabel.grid(row = row, column = 1, padx=2, pady=2)
