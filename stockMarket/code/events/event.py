@@ -22,7 +22,7 @@ class Event:
         '''Generates a dynamically generated event, to compliment the hardcoded ones'''
         randomValue = random.randint(0, 0)
         companies = getStockList()
-        finalCompany = companies[random.randint(0, len(companies))]
+        finalCompany = companies[random.randint(0, len(companies)-1)]
         if randomValue == 0:
             randomValue = float(random.randint(6,15))/100
             return Event(finalCompany.name + ' releases a hit new product!', 'Everyone wants to purchase the hit new product from ' + finalCompany.name, finalCompany.name, randomValue)

@@ -12,6 +12,7 @@ from stockMarket.code.events.getEvents import getAllEvents
 from stockMarket.code.stockMarket.getAllStocks import getAllStocks
 from stockMarket.code.stockMarket.portfolio import Portfolio
 from stockMarket.code.stockMarket.classStockMarket import *
+from stockMarket.code.coreCode.helpInterface import HelpInterface
 from functools import partial
 
 class GameGUI:
@@ -70,6 +71,13 @@ class GameGUI:
 
             row += 1
 
+        helpButton = tk.Button(self.rootWin, command=partial(self.open_HelpInterface))
+        helpButton["text"] = "Need Help?"
+        helpButton["font"] = "Arial 10"
+        helpButton["bg"] = "#b8e6fa"
+        helpButton["fg"] = "black"
+        helpButton.grid(row=0, column=10, padx=5, pady=0)
+
     def buyResponse(self, port, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
         port.ownedStocks[stock_name] += 1
         numSharesLabl["text"] = str(port.ownedStocks[stock_name])
@@ -101,17 +109,18 @@ class GameGUI:
         self.button3['text'] = self.market.currentEvents[2].name
         self.button2['command'] = partial(self.eventResponse, self.market.currentEvents[2])
 
+    def open_HelpInterface(self):
+        """ opens the help interface when "Need Help?" is clicked """
+        interface = HelpInterface()
+        interface.run()
+        HelpInterface.geometry("750x250")
+        HelpInterface.title("New Window")
+
 #  if we have a function that handles events for the quarter, it will:
     # choose a random event from the list
     # remove that event from the list
     # show a pop up window that tells user the details of the event
     # update the internal information and corresponding labels accordingly, just like we did in sell/buy response functions
-
-    #this function will need to be passed:
-        # the events
-        # the portfolio
-        # the stocks
-        # a list of all the labels (or just access them thru self.rootwin.children )
 
 
 
