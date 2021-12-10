@@ -11,6 +11,7 @@ import stockMarket.code.stockMarket.classStock
 from stockMarket.code.events.getEvents import getAllEvents
 from stockMarket.code.stockMarket.getAllStocks import getAllStocks
 from stockMarket.code.stockMarket.portfolio import Portfolio
+from stockMarket.code.stockMarket.classStockMarket import *
 from functools import partial
 
 class GameGUI:
@@ -19,15 +20,19 @@ class GameGUI:
         stocks = getAllStocks()
         events = getAllEvents()
         portfolio = Portfolio()
+        market = StockMarket(getAllStocks(), [], [], getAllEvents())
 
-        button1 = tk.Button(self.rootWin, text=events[0].generateDynamicEvent().name)
-        button1.grid(row=0, column=2)
+        self.eventText = tk.Label(self.rootWin, text="None")
+        self.eventText.grid(row=1, column=3)
 
-        button2 = tk.Button(self.rootWin, text=events[0].name)
-        button2.grid(row=0, column=3)
+        self.button1 = tk.Button(self.rootWin, command=self.eventResponse(events[0]), text=events[0].generateDynamicEvent().name)
+        self.button1.grid(row=0, column=2)
 
-        button3 = tk.Button(self.rootWin, text=events[0].generateDynamicEvent().name)
-        button3.grid(row=0, column=4)
+        self.button2 = tk.Button(self.rootWin, text=events[0].name)
+        self.button2.grid(row=0, column=3)
+
+        self.button3 = tk.Button(self.rootWin, text=events[0].generateDynamicEvent().name)
+        self.button3.grid(row=0, column=4)
 
         row = 2
         for i in portfolio.ownedStocks:
@@ -69,6 +74,10 @@ class GameGUI:
             port.ownedStocks[stock_name] -= 1
             numSharesLabl["text"] = str(port.ownedStocks[stock_name])
             totalValLabl["text"] = str(int(numSharesLabl["text"]) * float(shareValueLabl["text"]))
+
+    def eventResponse(self, event):
+        '''Responds when an event button is pressed by the user'''
+        self.eventText['text'] = event.detail
 
 #  if we have a function that handles events for the quarter, it will:
     # choose a random event from the list
