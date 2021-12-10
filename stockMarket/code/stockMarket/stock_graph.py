@@ -7,11 +7,12 @@ Author(s): Tina, Arnika
 
 import numpy as np
 import matplotlib.pyplot as plt
+import stockMarket.code.coreCode as game
 
-
-def stock(start_price, monetaryEffect, startingYr):
+def stock(start_price, monetaryEffect):
     """Takes in the the starting price of a stock as an input, and generates a randomized graph representing the
     stock, starting at the initial price."""
+    startingYr = game.currentTurnNumber + 1990
     sigma = 0.0023
     np.random.seed(0)
     returns = np.random.normal(loc=monetaryEffect/100, scale=sigma, size=30)
@@ -25,6 +26,3 @@ def stock(start_price, monetaryEffect, startingYr):
     plt.ylabel("Value of Stock")
     plt.title("Graph of Stock")
     plt.show()
-
-
-stock(4, 0.12, 1990)
