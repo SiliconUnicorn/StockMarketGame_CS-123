@@ -17,5 +17,6 @@ def stock(start_price):
     np.random.seed(0)
     returns = np.random.normal(loc=mu, scale=sigma, size=100)
     price = start_price*(1+returns).cumprod()
+
     plt.plot(price)
     plt.show()

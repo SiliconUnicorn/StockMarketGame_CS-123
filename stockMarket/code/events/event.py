@@ -20,10 +20,11 @@ class Event:
 
     def generateDynamicEvent(self):
         '''Generates a dynamically generated event, to compliment the hardcoded ones'''
-        randomValue = random.randint(0, 1)
-        companies = getAllStocks()
+        randomValue = random.randint(0, 0)
+        companies = getStockList()
         finalCompany = companies[random.randint(0, len(companies))]
         if randomValue == 0:
-            return Event(finalCompany.name + 'releases a hit new product!', 'Everyone wants to purchase the hit new product from ' + finalCompany.name, finalCompany.name, randomValue(0.06,0.15))
+            randomValue = float(random.randint(6,15))/100
+            return Event(finalCompany.name + ' releases a hit new product!', 'Everyone wants to purchase the hit new product from ' + finalCompany.name, finalCompany.name, randomValue)
         else:
             assert 0 == 1
