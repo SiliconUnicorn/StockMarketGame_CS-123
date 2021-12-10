@@ -13,32 +13,40 @@ from stockMarket.code.stockMarket.getAllStocks import getAllStocks
 from stockMarket.code.stockMarket.portfolio import Portfolio
 from stockMarket.code.stockMarket.classStockMarket import *
 from functools import partial
+from stockMarket.code.coreCode.helpInterface import HelpInterface
+
+
+
+
 
 class GameGUI:
     def __init__(self): # construter to create instance of the class
+        self.helpResponse = None
         self.rootWin = tk.Tk()
         stocks = getAllStocks()
         events = getAllEvents()
         portfolio = Portfolio()
         market = StockMarket(getAllStocks(), [], [], getAllEvents())
 
-        market.updateEvents()
+        # market.updateEvents()
+
 
         self.currentTurnNumber = 0
 
         self.eventText = tk.Label(self.rootWin, text="None")
         self.eventText.grid(row=3, column=8)
 
-        self.button1 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[0]), text=market.currentEvents[0].name)
-        self.button1.grid(row=0, column=8)
-
-        self.button2 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[1]), text=market.currentEvents[1].name)
-        self.button2.grid(row=1, column=8)
-
-        self.button3 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[2]), text=market.currentEvents[2].name)
-        self.button3.grid(row=2, column=8)
+        # self.button1 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[0]), text=market.currentEvents[0].name)
+        # self.button1.grid(row=0, column=8)
+        #
+        # self.button2 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[1]), text=market.currentEvents[1].name)
+        # self.button2.grid(row=1, column=8)
+        #
+        # self.button3 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[2]), text=market.currentEvents[2].name)
+        # self.button3.grid(row=2, column=8)
 
         row = 2
+
         for i in portfolio.ownedStocks:
             myLabel = tk.Label(self.rootWin, text = i)
             myLabel.grid(row = row, column = 1, padx=2, pady=2)
@@ -49,7 +57,7 @@ class GameGUI:
             totalStock =  portfolio.ownedStocks[i] * portfolio.getStockValue(stocks[i])
             totalValueLabel = tk.Label(self.rootWin, text=totalStock )
             totalValueLabel.grid(row=row, column=4, padx=2, pady=2)
-            #totalStock.
+
 
             buyButton = tk.Button(self.rootWin, command = partial(self.buyResponse, portfolio, i, numStocksLabel, stockValLabel, totalValueLabel))
             buyButton["text"] = "buy"
@@ -65,19 +73,30 @@ class GameGUI:
             sellButton["fg"] = "black"
             sellButton.grid(row=row, column=7)
 
+            helpButton = tk.Button(self.rootWin, command=partial(self.open_HelpInterface))
+            helpButton["text"] = "Need Help?"
+            helpButton["font"] = "Arial 10"
+            helpButton["bg"] = "#b8e6fa"
+            helpButton["fg"] = "black"
+            helpButton.grid(row=0, column=10, padx=5, pady=0)
+
+
             row += 1
 
     def buyResponse(self, port, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
+        """ makes it so when you click the buy button the number of shares goes up"""
         port.ownedStocks[stock_name] += 1
         numSharesLabl["text"] = str(port.ownedStocks[stock_name])
         totalValLabl["text"] =  str(int( numSharesLabl["text"]) * float( shareValueLabl["text"]))
 
 
     def sellResponse(self, port, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
+        """makes it so when you click sell the number of shares goes down but doesn't allow it to go past zero """
         if port.ownedStocks[stock_name] > 0:
             port.ownedStocks[stock_name] -= 1
             numSharesLabl["text"] = str(port.ownedStocks[stock_name])
             totalValLabl["text"] = str(int(numSharesLabl["text"]) * float(shareValueLabl["text"]))
+
 
     def eventResponse(self, event):
         '''Responds when an event button is pressed by the user'''
@@ -93,11 +112,16 @@ class GameGUI:
     # show a pop up window that tells user the details of the event
     # update the internal information and corresponding labels accordingly, just like we did in sell/buy response functions
 
-    #this function will need to be passed:
-        # the events
-        # the portfolio
-        # the stocks
-        # a list of all the labels (or just access them thru self.rootwin.children )
+    def open_HelpInterface(self):
+        """ opens the help interface when "Need Help?" is clicked """
+        interface = HelpInterface()
+        interface.run()
+        HelpInterface.geometry("750x250")
+        HelpInterface.title("New Window")
+
+
+
+
 
 
 
@@ -105,14 +129,11 @@ class GameGUI:
         self.rootWin.mainloop()
 
 
-    def testButtonResponse(self):
-        pass
+
 
 
 
 
 if __name__ == "__main__":
     myGUI = GameGUI()
-    print("b4 calling run")
     myGUI.run()
-    print("after calling run")
