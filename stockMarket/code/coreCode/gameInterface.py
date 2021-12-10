@@ -22,19 +22,21 @@ class GameGUI:
         portfolio = Portfolio()
         market = StockMarket(getAllStocks(), [], [], getAllEvents())
 
+        market.updateEvents()
+
         self.currentTurnNumber = 0
 
         self.eventText = tk.Label(self.rootWin, text="None")
-        self.eventText.grid(row=1, column=3)
+        self.eventText.grid(row=3, column=8)
 
-        self.button1 = tk.Button(self.rootWin, command=self.eventResponse(events[0]), text=events[0].generateDynamicEvent().name)
-        self.button1.grid(row=0, column=2)
+        self.button1 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[0]), text=market.currentEvents[0].name)
+        self.button1.grid(row=0, column=8)
 
-        self.button2 = tk.Button(self.rootWin, text=events[0].name)
-        self.button2.grid(row=0, column=3)
+        self.button2 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[1]), text=market.currentEvents[1].name)
+        self.button2.grid(row=1, column=8)
 
-        self.button3 = tk.Button(self.rootWin, text=events[0].generateDynamicEvent().name)
-        self.button3.grid(row=0, column=4)
+        self.button3 = tk.Button(self.rootWin, command=partial(self.eventResponse, market.currentEvents[2]), text=market.currentEvents[2].name)
+        self.button3.grid(row=2, column=8)
 
         row = 2
         for i in portfolio.ownedStocks:
