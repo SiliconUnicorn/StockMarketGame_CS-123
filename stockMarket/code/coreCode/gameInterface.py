@@ -132,12 +132,6 @@ class GameGUI:
     def run(self):
         self.rootWin.mainloop()
 
-
-
-
-
-
-
 if __name__ == "__main__":
     myGUI = GameGUI()
     myGUI.run()
