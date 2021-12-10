@@ -22,6 +22,8 @@ class GameGUI:
         portfolio = Portfolio()
         market = StockMarket(getAllStocks(), [], [], getAllEvents())
 
+        self.currentTurnNumber = 0
+
         self.eventText = tk.Label(self.rootWin, text="None")
         self.eventText.grid(row=1, column=3)
 
@@ -78,6 +80,10 @@ class GameGUI:
     def eventResponse(self, event):
         '''Responds when an event button is pressed by the user'''
         self.eventText['text'] = event.detail
+
+    def getCurrentYear(self):
+        '''Returns the current year in the game'''
+        return self.currentTurnNumber + 1990
 
 #  if we have a function that handles events for the quarter, it will:
     # choose a random event from the list
