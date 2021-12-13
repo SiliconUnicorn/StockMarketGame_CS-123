@@ -21,6 +21,7 @@ class GameGUI:
         and help button for user to seek assistant for the game """
         self.helpResponse = None
         self.rootWin = tk.Tk()
+        self.rootWin.title("Stock Market Game")
         stocks = getAllStocks()
         events = getAllEvents()
         portfolio = Portfolio()
@@ -70,7 +71,7 @@ class GameGUI:
             row += 1
 
         helpButton = tk.Button(self.rootWin, command=partial(self.open_HelpInterface))
-        helpButton["text"] = "How To:"
+        helpButton["text"] = "How To"
         helpButton["font"] = "Arial 10"
         helpButton["bg"] = "#b8e6fa"
         helpButton["fg"] = "black"
