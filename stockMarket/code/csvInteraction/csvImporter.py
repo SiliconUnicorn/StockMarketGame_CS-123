@@ -4,6 +4,7 @@ Course: COMP123-01
 Instructor: Lauren Milne
 Description: This file allows CSV files to be imported into the code. It iterates over CSV files and loads them
 as dictionaries for use in the game.
+Testing: Everything in this file can be tested in the test_csvImporter.py file.
 """
 
 def importCSV(path):
