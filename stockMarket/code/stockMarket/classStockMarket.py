@@ -26,9 +26,21 @@ class StockMarket:
         marketChange = float(random.randint(-2, 6))/100
         for stock in self.stocks:
             stockChanges[stock.category] = float(random.randint(-1, 5))/100
+            if self.currentEvents[0].category == stock.category or self.currentEvents[0].category == 'All':
+                stockChanges[stock.category] += float(self.currentEvents[0].effect)
+            if self.currentEvents[1].category == stock.category or self.currentEvents[1].category == 'All':
+                stockChanges[stock.category] += float(self.currentEvents[1].effect)
+            if self.currentEvents[2].category == stock.category or self.currentEvents[2].category == 'All':
+                stockChanges[stock.category] += float(self.currentEvents[2].effect)
             stockChanges[stock.name] = 0
+            if self.currentEvents[0].category == stock.name:
+                stockChanges[stock.name] += float(self.currentEvents[0].effect)
+            if self.currentEvents[1].category == stock.name:
+                stockChanges[stock.name] += float(self.currentEvents[1].effect)
+            if self.currentEvents[2].category == stock.name:
+                stockChanges[stock.name] += float(self.currentEvents[2].effect)
         for stock in self.stocks:
-            stock.updateStock(marketChange, stockChanges[stock.category], 0)
+            stock.updateStock(marketChange, stockChanges[stock.category], stockChanges[stock.name])
 
     def updateEvents(self):
         """Randomly chooses three events to be displayed on the game interface."""
