@@ -1,9 +1,10 @@
-'''
-File: csv_main.py
-Project: Stock Market Game
-Date: 5 Nov 2021
-Author(s): Micah Hansonbrook
-'''
+"""
+Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
+Course: COMP123-01
+Instructor: Lauren Milne
+Description: This file allows CSV files to be imported into the code. It iterates over CSV files and loads them
+as dictionaries for use in the game.
+"""
 
 def importCSV(path):
     '''
