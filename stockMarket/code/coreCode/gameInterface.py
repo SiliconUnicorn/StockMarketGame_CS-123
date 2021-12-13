@@ -43,6 +43,18 @@ class GameGUI:
         self.nextTurnButton = tk.Button(self.rootWin, command=self.nextTurn, text='Next Turn >')
         self.nextTurnButton.grid(row=0, column=0)
 
+        corpLabel = tk.Label(self.rootWin, text='Company Name')
+        corpLabel.grid(row=2, column=1)
+
+        sharesLabel = tk.Label(self.rootWin, text='Shares Held')
+        sharesLabel.grid(row=2, column=2)
+
+        shareValLabel = tk.Label(self.rootWin, text='Share Value')
+        shareValLabel.grid(row=2, column=3)
+
+        userSharesLabel = tk.Label(self.rootWin, text='Value of User Shares')
+        userSharesLabel.grid(row=2, column=4)
+
         self.performStockInterfaceLayout()
 
         helpButton = tk.Button(self.rootWin, command=partial(self.open_HelpInterface))
@@ -75,7 +87,7 @@ class GameGUI:
 
     def performStockInterfaceLayout(self):
         '''Performs essential interface layout tasks for the stock items'''
-        row = 2
+        row = 3
 
         for i in self.portfolio.ownedStocks:
             myLabel = tk.Label(self.rootWin, text=i)
