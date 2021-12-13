@@ -40,9 +40,15 @@ class StockMarket:
         self.currentEvents.append(self.currentEvents[0].generateDynamicEvent())
         self.currentEvents.append(self.currentEvents[0].generateDynamicEvent())
 
-if __name__ == "__main__":
-    '''Tests the Stock Market class'''
-    print("Testing Stock Market Class")
-    market = StockMarket()
-
-    print("Test Successful")
+# if __name__ == "__main__":
+#     '''Tests the Stock Market class'''
+#     print("Testing Stock Market Class")
+#     market = StockMarket()
+#     market.updateStocks()
+#     print(market.stocks)
+#     market.updateEvents()
+#     market.updateEvents()
+#     print(market.currentEvents)
+#     print(market.pastEvents)
+#     print(market.futureEventPool)
+#     print("Test Successful")
