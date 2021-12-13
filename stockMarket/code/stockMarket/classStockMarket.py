@@ -20,14 +20,12 @@ class StockMarket:
         stockChanges = {}
         stocks = {}
         marketChange = float(random.randint(-2, 6))/100
-        for stock in getStockList(): # Change Here
+        for stock in getStockList():  
             stockChanges[stock.category] = float(random.randint(-1, 5))/100
             stockChanges[stock.name] = 0
-        # for event in self.currentEvents:
-        #     stockChanges[event.category] *= 10000 * event.effect
 
-        for stock in getStockList(): # Change Here
-            stock.updateStock(marketChange, stockChanges[stock.category], 0) # Maybe change this later?
+        for stock in getStockList():  
+            stock.updateStock(marketChange, stockChanges[stock.category], 0)
 
     def updateEvents(self):
         self.pastEvents.append(self.currentEvents)
