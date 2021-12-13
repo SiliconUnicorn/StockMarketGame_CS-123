@@ -1,9 +1,10 @@
 """
-File: stockMarket_main.py
-Project: Stock Market Game
-Date: 21 Nov 2021
-Author(s): Arnika
+Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
+Course: COMP123-01
+Instructor: Lauren Milne
+This file contains the Stock Market class. 
 """
+
 
 import random
 from stockMarket.code.stockMarket.getAllStocks import *
