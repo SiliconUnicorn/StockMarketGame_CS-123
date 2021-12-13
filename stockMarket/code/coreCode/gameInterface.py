@@ -55,6 +55,7 @@ class GameGUI:
             self.portfolio.changeStock(self.market.getCurrentDictionary()[stock_name], 1)
             numSharesLabl["text"] = str(self.portfolio.ownedStocks[stock_name])
             totalValLabl["text"] = str(float(int((self.portfolio.ownedStocks[stock_name] * self.market.getCurrentDictionary()[stock_name].currentValue)*100))/100)
+            self.updateEventText()
 
 
     def sellResponse(self, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
@@ -63,6 +64,7 @@ class GameGUI:
             self.portfolio.changeStock(self.market.getCurrentDictionary()[stock_name], -1)
             numSharesLabl["text"] = str(self.portfolio.ownedStocks[stock_name])
             totalValLabl["text"] = str(float(int((self.portfolio.ownedStocks[stock_name] * self.market.getCurrentDictionary()[stock_name].currentValue)*100))/100)
+            self.updateEventText()
 
     def getCurrentYear(self):
         '''Returns the current year in the game'''
@@ -102,6 +104,19 @@ class GameGUI:
 
             row += 1
 
+    def updateEventText(self):
+        '''Updates the event text display, to reflect new information'''
+        self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
+        self.eventText.grid(row=1, column=8)
+        self.eventText.insert(1.0, "Current Year: " + str(self.getCurrentYear()) + '\t\tUser Cash: $' + str(
+            self.portfolio.userCash) + '\n\n' + self.market.currentEvents[0].name + ": " + self.market.currentEvents[
+                                  0].detail + "\n\n" +
+                              self.market.currentEvents[1].name + ": " + self.market.currentEvents[1].detail + "\n\n" +
+                              self.market.currentEvents[2].name + ": " + self.market.currentEvents[2].detail)
+
+        self.nextTurnButton = tk.Button(self.rootWin, command=self.nextTurn, text='Next Turn >')
+        self.nextTurnButton.grid(row=0, column=0)
+
     def nextTurn(self):
         '''Begins the next turn of the game.'''
         self.currentTurnNumber += 1
@@ -111,13 +126,7 @@ class GameGUI:
 
         self.performStockInterfaceLayout()
 
-        self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
-        self.eventText.grid(row=1, column=8)
-        self.eventText.insert(1.0, "Current Year: " + str(self.getCurrentYear()) + '\t\tUser Cash: $' + str(
-            self.portfolio.userCash) + '\n\n' + self.market.currentEvents[0].name + ": " + self.market.currentEvents[
-                                  0].detail + "\n\n" +
-                              self.market.currentEvents[1].name + ": " + self.market.currentEvents[1].detail + "\n\n" +
-                              self.market.currentEvents[2].name + ": " + self.market.currentEvents[2].detail)
+        self.updateEventText()
 
     def open_HelpInterface(self):
         """ opens the help interface/page when "Need Help?" is clicked """
