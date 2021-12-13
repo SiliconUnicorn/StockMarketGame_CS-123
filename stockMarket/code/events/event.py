@@ -18,6 +18,7 @@ class Event:
         self.detail = detail
         self.category = stockCategory
         self.effect = monetaryEffect
+        self.mostRecentEventFocus = Stock("None", 0, "None")
 
     def generateDynamicEvent(self):
         '''
@@ -25,7 +26,7 @@ class Event:
         returns: A new event.
         Testing methodology: this function was tested by checking outputs in the program and confirming realistic distribution of events.
         '''
-        randomValue = random.randint(0, 2)
+        randomValue = random.randint(0, 4)
         companies = getStockList()
         finalCompany = companies[random.randint(0, len(companies)-1)]
         if randomValue == 0:
@@ -37,5 +38,11 @@ class Event:
         elif randomValue == 2:
             randomValue = float(random.randint(-8, -2)) / 100
             return Event(finalCompany.name + ' Under Investigation', 'Antitrust authorities are currently investigating ' + finalCompany.name + ' for anticompetitive behavior.', finalCompany.name, randomValue)
+        elif randomValue == 3:
+            randomValue = float(random.randint(3, 7)) / 100
+            return Event(finalCompany.name + ' Makes Large Acquisition', finalCompany.name + ' has made a major acquisition that analysts believe will boost its bottom line.', finalCompany.name, randomValue)
+        elif randomValue == 4:
+            randomValue = float(random.randint(-25, -15)) / 100
+            return Event(finalCompany.name + ' Struggling', 'Sources indicate that ' + finalCompany.name + ' is struggling to pay its debts.', finalCompany.name, randomValue)
         else:
             assert 0 == 1

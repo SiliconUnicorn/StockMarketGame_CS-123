@@ -8,10 +8,7 @@ Testing: This file was tested by repeatedly running the gameInterface from the m
 
 
 import tkinter as tk
-
-import stockMarket.code.stockMarket.classStock
-from stockMarket.code.events.getEvents import getAllEvents
-from stockMarket.code.stockMarket.getAllStocks import getAllStocks
+import tkinter.scrolledtext as sTk
 from stockMarket.code.stockMarket.portfolio import Portfolio
 from stockMarket.code.stockMarket.classStockMarket import *
 from stockMarket.code.coreCode.helpInterface import HelpInterface
@@ -33,17 +30,11 @@ class GameGUI:
 
         self.currentTurnNumber = 0
 
-        self.eventText = tk.Label(self.rootWin, text="None")
-        self.eventText.grid(row=3, column=8)
-
-        self.button1 = tk.Button(self.rootWin, command=partial(self.eventResponse, self.market.currentEvents[0]), text=self.market.currentEvents[0].name)
-        self.button1.grid(row=0, column=8)
-
-        self.button2 = tk.Button(self.rootWin, command=partial(self.eventResponse, self.market.currentEvents[1]), text=self.market.currentEvents[1].name)
-        self.button2.grid(row=1, column=8)
-
-        self.button3 = tk.Button(self.rootWin, command=partial(self.eventResponse, self.market.currentEvents[2]), text=self.market.currentEvents[2].name)
-        self.button3.grid(row=2, column=8)
+        self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
+        self.eventText.grid(row=1, column=8)
+        self.eventText.insert(1.0, self.market.currentEvents[0].name + ": " + self.market.currentEvents[0].detail + "\n\n" +
+                              self.market.currentEvents[1].name + ": " + self.market.currentEvents[1].detail + "\n\n" +
+                              self.market.currentEvents[2].name + ": " + self.market.currentEvents[2].detail)
 
         self.nextTurnButton = tk.Button(self.rootWin, command=self.nextTurn, text='Next Turn >')
         self.nextTurnButton.grid(row=0, column=0)
@@ -99,11 +90,6 @@ class GameGUI:
             numSharesLabl["text"] = str(port.ownedStocks[stock_name])
             totalValLabl["text"] = str(int(numSharesLabl["text"]) * float(shareValueLabl["text"]))
 
-
-    def eventResponse(self, event):
-        '''Responds when an event button is pressed by the user'''
-        self.eventText['text'] = event.detail
-
     def getCurrentYear(self):
         '''Returns the current year in the game'''
         return self.currentTurnNumber + 1990
@@ -112,19 +98,17 @@ class GameGUI:
         '''Begins the next turn of the game.'''
         self.market.updateEvents()
         self.market.updateStocks()
-        self.button1['text'] = self.market.currentEvents[0].name
-        self.button1['command'] = partial(self.eventResponse, self.market.currentEvents[0])
-        self.button2['text'] = self.market.currentEvents[1].name
-        self.button2['command'] = partial(self.eventResponse, self.market.currentEvents[1])
-        self.button3['text'] = self.market.currentEvents[2].name
-        self.button3['command'] = partial(self.eventResponse, self.market.currentEvents[2])
+
+        self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
+        self.eventText.grid(row=1, column=8)
+        self.eventText.insert(1.0, self.market.currentEvents[0].name + ": " + self.market.currentEvents[0].detail + "\n\n" +
+                              self.market.currentEvents[1].name + ": " + self.market.currentEvents[1].detail + "\n\n" +
+                              self.market.currentEvents[2].name + ": " + self.market.currentEvents[2].detail)
 
     def open_HelpInterface(self):
         """ opens the help interface/page when "Need Help?" is clicked """
         interface = HelpInterface()
         interface.run()
-        HelpInterface.geometry("750x250")
-        HelpInterface.title("New Window")
 
 
 

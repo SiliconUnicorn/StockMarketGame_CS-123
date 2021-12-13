@@ -7,7 +7,6 @@ The portfolio also tracks the users net worth and owned stocks.
 Testing: This class was tested using the commented out code below.
 """
 
-from stockMarket.code.stockMarket.classStock import *
 from stockMarket.code.stockMarket.getAllStocks import *
 
 class Portfolio:
