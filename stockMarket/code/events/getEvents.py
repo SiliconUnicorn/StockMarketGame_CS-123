@@ -4,6 +4,7 @@ Course: COMP123-01
 Instructor: Lauren Milne
 Description: This file allows events to be pulled from the events.csv CSV file. It provides formatting conveniance
 and allows easy return of a List of events to the user.
+Testing: Everything in this file can be tested in the test_getEvents.py file.
 """
 
 from stockMarket.code.csvInteraction.csvImporter import *

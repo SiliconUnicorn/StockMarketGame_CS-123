@@ -20,7 +20,11 @@ class Event:
         self.effect = monetaryEffect
 
     def generateDynamicEvent(self):
-        '''Generates a dynamically generated event, to compliment the hardcoded ones'''
+        '''
+        Generates a dynamically generated event, to compliment the hardcoded ones
+        returns: A new event.
+        Testing methodology: this function was tested by checking outputs in the program and confirming realistic distribution of events.
+        '''
         randomValue = random.randint(0, 2)
         companies = getStockList()
         finalCompany = companies[random.randint(0, len(companies)-1)]
