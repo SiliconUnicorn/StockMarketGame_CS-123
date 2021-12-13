@@ -2,7 +2,7 @@
 Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
 Course: COMP123-01
 Instructor: Lauren Milne
-this file contains the interface code for our game. All the buttons, calls and labels for our display is below
+Description: This file contains the interface code for our game. All the buttons, calls and labels for our display is below
 """
 
 
