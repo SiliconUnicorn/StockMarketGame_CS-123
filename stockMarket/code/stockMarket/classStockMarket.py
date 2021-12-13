@@ -31,7 +31,7 @@ class StockMarket:
 
     def updateEvents(self):
         self.pastEvents.append(self.currentEvents)
-        self.currentEvents.clear()
+        self.currentEvents = []
         self.currentEvents = random.choices(self.futureEventPool, k=1)
         self.currentEvents.append(self.currentEvents[0].generateDynamicEvent())
         self.currentEvents.append(self.currentEvents[0].generateDynamicEvent())
