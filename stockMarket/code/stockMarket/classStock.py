@@ -2,7 +2,7 @@
 Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
 Course: COMP123-01
 Instructor: Lauren Milne
-This file contains the Stock class. 
+Description: This file contains the Stock class. 
 """
 
 import random
