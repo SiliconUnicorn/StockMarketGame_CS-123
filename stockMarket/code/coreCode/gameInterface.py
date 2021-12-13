@@ -27,7 +27,7 @@ class GameGUI:
         stocks = getAllStocks()
         events = getAllEvents()
         portfolio = Portfolio()
-        self.market = StockMarket(getAllStocks(), [], [], getAllEvents())
+        self.market = StockMarket()
 
         self.market.updateEvents()
 
