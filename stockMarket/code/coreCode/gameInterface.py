@@ -1,9 +1,10 @@
 """
-File: gameInterface.py
-Project: Stock Market Game
-Date: 8 Nov 2021
-Author: Sarah
+Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
+Course: COMP123-01
+Instructor: Lauren Milne
+this file contains the interface code for our game. All the buttons, calls and labels for our display is below
 """
+
 
 import tkinter as tk
 
@@ -16,7 +17,10 @@ from stockMarket.code.coreCode.helpInterface import HelpInterface
 from functools import partial
 
 class GameGUI:
-    def __init__(self): # construter to create instance of the class
+    def __init__(self):
+        """ displays the event buttons and labels so they user can seek out the stocks """
+        """ loop: the list of stocks, the # of stocks, the value of the stocks, total of both(# of stocks * value)
+        and help button for user to seek assistant for the game """
         self.helpResponse = None
         self.rootWin = tk.Tk()
         stocks = getAllStocks()
@@ -115,17 +119,11 @@ class GameGUI:
         self.button3['command'] = partial(self.eventResponse, self.market.currentEvents[2])
 
     def open_HelpInterface(self):
-        """ opens the help interface when "Need Help?" is clicked """
+        """ opens the help interface/page when "Need Help?" is clicked """
         interface = HelpInterface()
         interface.run()
         HelpInterface.geometry("750x250")
         HelpInterface.title("New Window")
-
-#  if we have a function that handles events for the quarter, it will:
-    # choose a random event from the list
-    # remove that event from the list
-    # show a pop up window that tells user the details of the event
-    # update the internal information and corresponding labels accordingly, just like we did in sell/buy response functions
 
 
 
