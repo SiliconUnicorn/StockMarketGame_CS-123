@@ -78,7 +78,7 @@ class GameGUI:
             row += 1
 
         helpButton = tk.Button(self.rootWin, command=partial(self.open_HelpInterface))
-        helpButton["text"] = "Need Help?"
+        helpButton["text"] = "How To:"
         helpButton["font"] = "Arial 10"
         helpButton["bg"] = "#b8e6fa"
         helpButton["fg"] = "black"
