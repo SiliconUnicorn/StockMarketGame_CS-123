@@ -24,7 +24,7 @@ class GameGUI:
         self.rootWin.title("Stock Market Game")
         stocks = getAllStocks()
         events = getAllEvents()
-        portfolio = Portfolio()
+        self.portfolio = Portfolio()
         self.market = StockMarket()
 
         self.market.updateEvents()
@@ -33,7 +33,7 @@ class GameGUI:
 
         self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
         self.eventText.grid(row=1, column=8)
-        self.eventText.insert(1.0, self.market.currentEvents[0].name + ": " + self.market.currentEvents[0].detail + "\n\n" +
+        self.eventText.insert(1.0, "Current Year: " + str(self.getCurrentYear()) + '\t\tUser Cash: $' + str(self.portfolio.userCash) + '\n\n' + self.market.currentEvents[0].name + ": " + self.market.currentEvents[0].detail + "\n\n" +
                               self.market.currentEvents[1].name + ": " + self.market.currentEvents[1].detail + "\n\n" +
                               self.market.currentEvents[2].name + ": " + self.market.currentEvents[2].detail)
 
@@ -42,26 +42,26 @@ class GameGUI:
 
         row = 2
 
-        for i in portfolio.ownedStocks:
+        for i in self.portfolio.ownedStocks:
             myLabel = tk.Label(self.rootWin, text = i)
             myLabel.grid(row = row, column = 1, padx=2, pady=2)
-            numStocksLabel = tk.Label(self.rootWin, text =portfolio.ownedStocks[i])
+            numStocksLabel = tk.Label(self.rootWin, text = self.portfolio.ownedStocks[i])
             numStocksLabel.grid(row = row, column = 2, padx=10, pady=2)
-            stockValLabel = tk.Label(self.rootWin, text = portfolio.getStockValue(stocks[i]))
+            stockValLabel = tk.Label(self.rootWin, text = self.portfolio.getStockValue(stocks[i]))
             stockValLabel.grid(row = row, column = 3, padx=2, pady=2)
-            totalStock =  portfolio.ownedStocks[i] * portfolio.getStockValue(stocks[i])
+            totalStock =  self.portfolio.ownedStocks[i] * self.portfolio.getStockValue(stocks[i])
             totalValueLabel = tk.Label(self.rootWin, text=totalStock )
             totalValueLabel.grid(row=row, column=4, padx=2, pady=2)
 
 
-            buyButton = tk.Button(self.rootWin, command = partial(self.buyResponse, portfolio, i, numStocksLabel, stockValLabel, totalValueLabel))
+            buyButton = tk.Button(self.rootWin, command = partial(self.buyResponse, i, numStocksLabel, stockValLabel, totalValueLabel))
             buyButton["text"] = "buy"
             buyButton["font"] = "Arial 12"
             buyButton["bg"] = "#aafaa1"
             buyButton["fg"] = "black"
             buyButton.grid(row=row, column=6)
 
-            sellButton = tk.Button(self.rootWin, command = partial(self.sellResponse, portfolio, i, numStocksLabel, stockValLabel, totalValueLabel))
+            sellButton = tk.Button(self.rootWin, command = partial(self.sellResponse, i, numStocksLabel, stockValLabel, totalValueLabel))
             sellButton["text"] = "sell"
             sellButton["font"] = "Arial 12"
             sellButton["bg"] = "#e8b6f9"
@@ -77,18 +77,18 @@ class GameGUI:
         helpButton["fg"] = "black"
         helpButton.grid(row=0, column=10, padx=5, pady=0)
 
-    def buyResponse(self, port, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
+    def buyResponse(self, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
         """ makes it so when you click the buy button the number of shares goes up"""
-        port.ownedStocks[stock_name] += 1
-        numSharesLabl["text"] = str(port.ownedStocks[stock_name])
+        self.portfolio.ownedStocks[stock_name] += 1
+        numSharesLabl["text"] = str(self.portfolio.ownedStocks[stock_name])
         totalValLabl["text"] =  str(int( numSharesLabl["text"]) * float( shareValueLabl["text"]))
 
 
-    def sellResponse(self, port, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
+    def sellResponse(self, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
         """makes it so when you click sell the number of shares goes down but doesn't allow it to go past zero """
-        if port.ownedStocks[stock_name] > 0:
-            port.ownedStocks[stock_name] -= 1
-            numSharesLabl["text"] = str(port.ownedStocks[stock_name])
+        if self.portfolio.ownedStocks[stock_name] > 0:
+            self.portfolio.ownedStocks[stock_name] -= 1
+            numSharesLabl["text"] = str(self.portfolio.ownedStocks[stock_name])
             totalValLabl["text"] = str(int(numSharesLabl["text"]) * float(shareValueLabl["text"]))
 
     def getCurrentYear(self):
@@ -97,12 +97,16 @@ class GameGUI:
 
     def nextTurn(self):
         '''Begins the next turn of the game.'''
+        self.currentTurnNumber += 1
+
         self.market.updateEvents()
         self.market.updateStocks()
 
         self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
         self.eventText.grid(row=1, column=8)
-        self.eventText.insert(1.0, self.market.currentEvents[0].name + ": " + self.market.currentEvents[0].detail + "\n\n" +
+        self.eventText.insert(1.0, "Current Year: " + str(self.getCurrentYear()) + '\t\tUser Cash: $' + str(
+            self.portfolio.userCash) + '\n\n' + self.market.currentEvents[0].name + ": " + self.market.currentEvents[
+                                  0].detail + "\n\n" +
                               self.market.currentEvents[1].name + ": " + self.market.currentEvents[1].detail + "\n\n" +
                               self.market.currentEvents[2].name + ": " + self.market.currentEvents[2].detail)
 
