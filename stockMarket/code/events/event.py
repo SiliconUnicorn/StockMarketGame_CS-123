@@ -1,9 +1,10 @@
-'''
-File: event.py
-Project: Stock Market Game
-Date: 3 Dec 2021
-Author(s): Micah Hansonbrook
-'''
+"""
+Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
+Course: COMP123-01
+Instructor: Lauren Milne
+Description: This file defines the Event class, which represents an event that the user experiences during the game.
+"""
+
 
 import random
 from stockMarket.code.stockMarket.getAllStocks import *

@@ -1,9 +1,10 @@
-'''
-File: getEvents.py
-Project: Stock Market Game
-Date: 6 Nov 2021
-Author(s): Micah Hansonbrook
-'''
+"""
+Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
+Course: COMP123-01
+Instructor: Lauren Milne
+Description: This file allows events to be pulled from the events.csv CSV file. It provides formatting conveniance
+and allows easy return of a List of events to the user.
+"""
 
 from stockMarket.code.csvInteraction.csvImporter import *
 from stockMarket.code.events.event import *
