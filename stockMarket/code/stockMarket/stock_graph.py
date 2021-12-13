@@ -1,9 +1,10 @@
 """
-File: stock_graph.py
-Project: Stock Market Game
-Date: 5 Nov 2021
-Author(s): Tina, Arnika
+Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
+Course: COMP123-01
+Instructor: Lauren Milne
+This file contains function that generates the graph of a stock.
 """
+
 
 import numpy as np
 import matplotlib.pyplot as plt
