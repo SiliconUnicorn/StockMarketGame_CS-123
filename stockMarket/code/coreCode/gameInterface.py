@@ -33,7 +33,10 @@ class GameGUI:
 
         self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
         self.eventText.grid(row=1, column=8)
-        self.eventText.insert(1.0, "Current Year: " + str(self.getCurrentYear()) + '\t\tUser Cash: $' + str(self.portfolio.userCash) + '\n\n' + self.market.currentEvents[0].name + ": " + self.market.currentEvents[0].detail + "\n\n" +
+        self.eventText.insert(1.0, "Current Year: " + str(self.getCurrentYear()) + '\t\tUser Cash: $' + str(
+            self.portfolio.userCash) + '\t\tUser Net Worth: $' + str(self.portfolio.getCashValue(self.market.stocks)) +
+                              '\n\n' + self.market.currentEvents[0].name + ": " + self.market.currentEvents[
+                                  0].detail + "\n\n" +
                               self.market.currentEvents[1].name + ": " + self.market.currentEvents[1].detail + "\n\n" +
                               self.market.currentEvents[2].name + ": " + self.market.currentEvents[2].detail)
 
@@ -82,7 +85,7 @@ class GameGUI:
             stockValLabel = tk.Label(self.rootWin, text=self.market.getCurrentDictionary()[i].currentValue)
             stockValLabel.grid(row=row, column=3, padx=2, pady=2)
             totalStock = float(
-                int((self.portfolio.ownedStocks[i] * self.portfolio.getStockValue(self.market.getCurrentDictionary()[i])) * 100)) / 100
+                int((self.portfolio.getStockValue(self.market.getCurrentDictionary()[i])) * 100)) / 100
             totalValueLabel = tk.Label(self.rootWin, text=totalStock)
             totalValueLabel.grid(row=row, column=4, padx=2, pady=2)
 
@@ -109,7 +112,8 @@ class GameGUI:
         self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
         self.eventText.grid(row=1, column=8)
         self.eventText.insert(1.0, "Current Year: " + str(self.getCurrentYear()) + '\t\tUser Cash: $' + str(
-            self.portfolio.userCash) + '\n\n' + self.market.currentEvents[0].name + ": " + self.market.currentEvents[
+            self.portfolio.userCash) + '\t\tUser Net Worth: $' + str(self.portfolio.getCashValue(self.market.stocks)) +
+                              '\n\n' + self.market.currentEvents[0].name + ": " + self.market.currentEvents[
                                   0].detail + "\n\n" +
                               self.market.currentEvents[1].name + ": " + self.market.currentEvents[1].detail + "\n\n" +
                               self.market.currentEvents[2].name + ": " + self.market.currentEvents[2].detail)

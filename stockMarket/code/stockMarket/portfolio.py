@@ -23,7 +23,7 @@ class Portfolio:
         accumulator = 0
         for stock in currentStocks:
             accumulator += float(stock.currentValue) * float(self.ownedStocks[stock.name])
-        return self.userCash + accumulator
+        return float(int((self.userCash + accumulator)*100))/100
 
     def getStockValue(self, stock):
         '''Calculates the cash value of the stock in the portfolio'''
@@ -42,6 +42,7 @@ class Portfolio:
             name = stock.name
             self.ownedStocks[name] += shares
             self.userCash -= shares * stock.currentValue
+            self.userCash = float(int(self.userCash * 100))/100
         else:
             'This should never happen. Confirm that user can purchase stocks before making purchase'
             assert 0 == 1
