@@ -24,6 +24,7 @@ class GameGUI:
         and help button for user to seek assistant for the game """
         self.helpResponse = None
         self.rootWin = tk.Tk()
+        self.rootWin.title("Stock Market Game")
         stocks = getAllStocks()
         events = getAllEvents()
         portfolio = Portfolio()
