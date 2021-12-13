@@ -40,35 +40,7 @@ class GameGUI:
         self.nextTurnButton = tk.Button(self.rootWin, command=self.nextTurn, text='Next Turn >')
         self.nextTurnButton.grid(row=0, column=0)
 
-        row = 2
-
-        for i in self.portfolio.ownedStocks:
-            myLabel = tk.Label(self.rootWin, text = i)
-            myLabel.grid(row = row, column = 1, padx=2, pady=2)
-            numStocksLabel = tk.Label(self.rootWin, text = self.portfolio.ownedStocks[i])
-            numStocksLabel.grid(row = row, column = 2, padx=10, pady=2)
-            stockValLabel = tk.Label(self.rootWin, text = self.market.getCurrentDictionary()[i].currentValue)
-            stockValLabel.grid(row = row, column = 3, padx=2, pady=2)
-            totalStock =  self.portfolio.ownedStocks[i] * self.portfolio.getStockValue(stocks[i])
-            totalValueLabel = tk.Label(self.rootWin, text=totalStock )
-            totalValueLabel.grid(row=row, column=4, padx=2, pady=2)
-
-
-            buyButton = tk.Button(self.rootWin, command = partial(self.buyResponse, i, numStocksLabel, stockValLabel, totalValueLabel))
-            buyButton["text"] = "buy"
-            buyButton["font"] = "Arial 12"
-            buyButton["bg"] = "#aafaa1"
-            buyButton["fg"] = "black"
-            buyButton.grid(row=row, column=6)
-
-            sellButton = tk.Button(self.rootWin, command = partial(self.sellResponse, i, numStocksLabel, stockValLabel, totalValueLabel))
-            sellButton["text"] = "sell"
-            sellButton["font"] = "Arial 12"
-            sellButton["bg"] = "#e8b6f9"
-            sellButton["fg"] = "black"
-            sellButton.grid(row=row, column=7)
-
-            row += 1
+        self.performStockInterfaceLayout()
 
         helpButton = tk.Button(self.rootWin, command=partial(self.open_HelpInterface))
         helpButton["text"] = "How To"
@@ -79,21 +51,56 @@ class GameGUI:
 
     def buyResponse(self, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
         """ makes it so when you click the buy button the number of shares goes up"""
-        self.portfolio.ownedStocks[stock_name] += 1
-        numSharesLabl["text"] = str(self.portfolio.ownedStocks[stock_name])
-        totalValLabl["text"] =  str(int( numSharesLabl["text"]) * float( shareValueLabl["text"]))
+        if self.portfolio.confirmUserPurchasable(self.market.getCurrentDictionary()[stock_name], 1):
+            self.portfolio.changeStock(self.market.getCurrentDictionary()[stock_name], 1)
+            numSharesLabl["text"] = str(self.portfolio.ownedStocks[stock_name])
+            totalValLabl["text"] = str(float(int((self.portfolio.ownedStocks[stock_name] * self.market.getCurrentDictionary()[stock_name].currentValue)*100))/100)
 
 
     def sellResponse(self, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
         """makes it so when you click sell the number of shares goes down but doesn't allow it to go past zero """
         if self.portfolio.ownedStocks[stock_name] > 0:
-            self.portfolio.ownedStocks[stock_name] -= 1
+            self.portfolio.changeStock(self.market.getCurrentDictionary()[stock_name], -1)
             numSharesLabl["text"] = str(self.portfolio.ownedStocks[stock_name])
-            totalValLabl["text"] = str(int(numSharesLabl["text"]) * float(shareValueLabl["text"]))
+            totalValLabl["text"] = str(float(int((self.portfolio.ownedStocks[stock_name] * self.market.getCurrentDictionary()[stock_name].currentValue)*100))/100)
 
     def getCurrentYear(self):
         '''Returns the current year in the game'''
         return self.currentTurnNumber + 1990
+
+    def performStockInterfaceLayout(self):
+        '''Performs essential interface layout tasks for the stock items'''
+        row = 2
+
+        for i in self.portfolio.ownedStocks:
+            myLabel = tk.Label(self.rootWin, text=i)
+            myLabel.grid(row=row, column=1, padx=2, pady=2)
+            numStocksLabel = tk.Label(self.rootWin, text=self.portfolio.ownedStocks[i])
+            numStocksLabel.grid(row=row, column=2, padx=10, pady=2)
+            stockValLabel = tk.Label(self.rootWin, text=self.market.getCurrentDictionary()[i].currentValue)
+            stockValLabel.grid(row=row, column=3, padx=2, pady=2)
+            totalStock = float(
+                int((self.portfolio.ownedStocks[i] * self.portfolio.getStockValue(self.market.getCurrentDictionary()[i])) * 100)) / 100
+            totalValueLabel = tk.Label(self.rootWin, text=totalStock)
+            totalValueLabel.grid(row=row, column=4, padx=2, pady=2)
+
+            buyButton = tk.Button(self.rootWin,
+                                  command=partial(self.buyResponse, i, numStocksLabel, stockValLabel, totalValueLabel))
+            buyButton["text"] = "buy"
+            buyButton["font"] = "Arial 12"
+            buyButton["bg"] = "#aafaa1"
+            buyButton["fg"] = "black"
+            buyButton.grid(row=row, column=6)
+
+            sellButton = tk.Button(self.rootWin, command=partial(self.sellResponse, i, numStocksLabel, stockValLabel,
+                                                                 totalValueLabel))
+            sellButton["text"] = "sell"
+            sellButton["font"] = "Arial 12"
+            sellButton["bg"] = "#e8b6f9"
+            sellButton["fg"] = "black"
+            sellButton.grid(row=row, column=7)
+
+            row += 1
 
     def nextTurn(self):
         '''Begins the next turn of the game.'''
@@ -102,15 +109,7 @@ class GameGUI:
         self.market.updateEvents()
         self.market.updateStocks()
 
-        row = 2
-
-        for i in self.market.stocks:
-            stockValLabel = tk.Label(self.rootWin, text = i.currentValue)
-            stockValLabel.grid(row = row, column = 3, padx=2, pady=2)
-            totalStock =  self.portfolio.ownedStocks[i.name] * i.currentValue
-            totalValueLabel = tk.Label(self.rootWin, text=totalStock)
-            totalValueLabel.grid(row=row, column=4, padx=2, pady=2)
-            row += 1
+        self.performStockInterfaceLayout()
 
         self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
         self.eventText.grid(row=1, column=8)

@@ -41,7 +41,7 @@ class Portfolio:
         if self.confirmUserPurchasable(stock, shares):
             name = stock.name
             self.ownedStocks[name] += shares
-            self.userCash += shares * stock.currentValue
+            self.userCash -= shares * stock.currentValue
         else:
             'This should never happen. Confirm that user can purchase stocks before making purchase'
             assert 0 == 1
