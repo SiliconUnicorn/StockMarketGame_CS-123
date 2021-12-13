@@ -1,8 +1,9 @@
 """
-File: helpInterface.py
-Project: Stock Market Game
-Date: 3 Dec 2021
-Author: Micah Hansonbrook
+Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
+Course: COMP123-01
+Instructor: Lauren Milne
+Description: This file contains the interface code for our information page. It displays simple instructions to the user.
+Testing: This file was tested by running the helpInterface.
 """
 
 import tkinter as tk
