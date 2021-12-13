@@ -4,6 +4,7 @@ Course: COMP123-01
 Instructor: Lauren Milne
 Description: This file defines the Portfolio class, which represents the player's stock portfolio.
 The portfolio also tracks the users net worth and owned stocks.
+Testing: This class was tested using the commented out code below.
 """
 
 from stockMarket.code.stockMarket.classStock import *
@@ -45,3 +46,15 @@ class Portfolio:
         else:
             'This should never happen. Confirm that user can purchase stocks before making purchase'
             assert 0 == 1
+
+# if __name__ == "__main__":
+    # '''Tests the Portfolio class.'''
+    # print("Beginning Portfolio Test")
+    # portfolio = Portfolio()
+    # testStock = getStockList()[0]
+    # assert portfolio.confirmUserPurchasable(testStock, 2) == True
+    # portfolio.changeStock(testStock, 2)
+    # print(portfolio.ownedStocks)
+    # print(portfolio.getStockValue(testStock))
+    # print(portfolio.getCashValue([testStock]))
+    # print("Portfolio Test Successful")

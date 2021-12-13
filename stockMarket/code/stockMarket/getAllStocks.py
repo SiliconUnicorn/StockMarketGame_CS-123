@@ -8,6 +8,7 @@ and allows easy return of a List of stocks or a Dictionary of stocks to the user
 
 from stockMarket.code.stockMarket.classStock import *
 from stockMarket.code.csvInteraction.csvImporter import *
+import os
 
 def getAllStocks():
     '''
@@ -33,4 +34,11 @@ def getStocks():
     Gets all of the stock information, in a dictionary format
     returns: The stock information!
     '''
-    return importCSV('../assets/csv/stocks.csv')
+    directory = os.getcwd()
+    newDirectory = ''
+    for character in directory:
+        if len(newDirectory) > 13 and newDirectory[len(newDirectory)-13:len(newDirectory)-1] == '/stockMarket':
+            break
+        else:
+            newDirectory += character
+    return importCSV(newDirectory + '/assets/csv/stocks.csv')

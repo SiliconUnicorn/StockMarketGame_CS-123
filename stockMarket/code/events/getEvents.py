@@ -15,7 +15,14 @@ def getEvents():
     Gets all of the event information, in a dictionary format
     returns: The event information!
     '''
-    return importCSV('../assets/csv/events.csv')
+    directory = os.getcwd()
+    newDirectory = ''
+    for character in directory:
+        if len(newDirectory) > 13 and newDirectory[len(newDirectory)-13:len(newDirectory)-1] == '/stockMarket':
+            break
+        else:
+            newDirectory += character
+    return importCSV(newDirectory + '/assets/csv/events.csv')
 
 def getAllEvents():
     '''
