@@ -23,13 +23,11 @@ class StockMarket:
     def updateStocks(self):
         """Decides whether the stock will change according to the events in the game, and makes the corresponding change to value."""
         stockChanges = {}
-        stocks = {}
         marketChange = float(random.randint(-2, 6))/100
-        for stock in stocks:
+        for stock in self.stocks:
             stockChanges[stock.category] = float(random.randint(-1, 5))/100
             stockChanges[stock.name] = 0
-
-        for stock in stocks:
+        for stock in self.stocks:
             stock.updateStock(marketChange, stockChanges[stock.category], 0)
 
     def updateEvents(self):
@@ -40,15 +38,25 @@ class StockMarket:
         self.currentEvents.append(self.currentEvents[0].generateDynamicEvent())
         self.currentEvents.append(self.currentEvents[0].generateDynamicEvent())
 
+    def getCurrentDictionary(self):
+        '''Generates a dictionary composed of current values, using name as key'''
+        accumulator = {}
+        for value in self.stocks:
+            accumulator[value.name] = value
+        return accumulator
+
 # if __name__ == "__main__":
 #     '''Tests the Stock Market class'''
 #     print("Testing Stock Market Class")
 #     market = StockMarket()
+#     print(market.stocks[0].currentValue)
 #     market.updateStocks()
+#     print(market.stocks[0].currentValue)
 #     print(market.stocks)
 #     market.updateEvents()
 #     market.updateEvents()
 #     print(market.currentEvents)
 #     print(market.pastEvents)
 #     print(market.futureEventPool)
+#     print(market.getCurrentDictionary())
 #     print("Test Successful")

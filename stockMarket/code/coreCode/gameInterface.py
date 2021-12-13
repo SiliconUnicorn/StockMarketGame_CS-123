@@ -47,7 +47,7 @@ class GameGUI:
             myLabel.grid(row = row, column = 1, padx=2, pady=2)
             numStocksLabel = tk.Label(self.rootWin, text = self.portfolio.ownedStocks[i])
             numStocksLabel.grid(row = row, column = 2, padx=10, pady=2)
-            stockValLabel = tk.Label(self.rootWin, text = self.portfolio.getStockValue(stocks[i]))
+            stockValLabel = tk.Label(self.rootWin, text = self.market.getCurrentDictionary()[i].currentValue)
             stockValLabel.grid(row = row, column = 3, padx=2, pady=2)
             totalStock =  self.portfolio.ownedStocks[i] * self.portfolio.getStockValue(stocks[i])
             totalValueLabel = tk.Label(self.rootWin, text=totalStock )
@@ -101,6 +101,16 @@ class GameGUI:
 
         self.market.updateEvents()
         self.market.updateStocks()
+
+        row = 2
+
+        for i in self.market.stocks:
+            stockValLabel = tk.Label(self.rootWin, text = i.currentValue)
+            stockValLabel.grid(row = row, column = 3, padx=2, pady=2)
+            totalStock =  self.portfolio.ownedStocks[i.name] * i.currentValue
+            totalValueLabel = tk.Label(self.rootWin, text=totalStock)
+            totalValueLabel.grid(row=row, column=4, padx=2, pady=2)
+            row += 1
 
         self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
         self.eventText.grid(row=1, column=8)
