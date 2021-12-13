@@ -144,6 +144,17 @@ class GameGUI:
 
         self.updateEventText()
 
+        if self.currentTurnNumber >= 30:
+            if self.portfolio.getCashValue(self.market.stocks) >= 10000:
+                self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
+                self.eventText.grid(row=1, column=8)
+                self.eventText.insert(1.0, "You have successfully won the game! Congragulations!")
+            else:
+                self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
+                self.eventText.grid(row=1, column=8)
+                self.eventText.insert(1.0, "You have lost the game. Better luck next time."
+                                           "")
+
     def open_HelpInterface(self):
         """ opens the help interface/page when "Need Help?" is clicked """
         interface = HelpInterface()
