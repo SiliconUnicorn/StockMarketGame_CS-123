@@ -1,9 +1,10 @@
-'''
-File: portfolio.py
-Project: Stock Market Game
-Date: 21 Nov 2021
-Author(s): Micah Hansonbrook
-'''
+"""
+Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
+Course: COMP123-01
+Instructor: Lauren Milne
+Description: This file defines the Portfolio class, which represents the player's stock portfolio.
+The portfolio also tracks the users net worth and owned stocks.
+"""
 
 from stockMarket.code.stockMarket.classStock import *
 from stockMarket.code.stockMarket.getAllStocks import *
