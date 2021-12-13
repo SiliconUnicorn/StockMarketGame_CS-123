@@ -1,9 +1,3 @@
-"""
-Names: Arnika Abeysekera, Micah Hansonbrook, Sarah Ali, Tina Chen
-Course: COMP123-01
-Instructor: Lauren Milne
-Description: This CSV file provides the stocks' names, their initial price per share, and the time for IPO.
-"""
 Stocks,Real Name,Category,Initial Price per Share,IPO
 APPL,Apple,Tech,0.35,1990
 FB,Meta Corp.,Tech,12.50,2012
