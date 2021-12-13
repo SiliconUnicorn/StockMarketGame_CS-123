@@ -14,7 +14,7 @@ def getEvents():
     Gets all of the event information, in a dictionary format
     returns: The event information!
     '''
-    return importCSV('../../assets/csv/events.csv')
+    return importCSV('../assets/csv/events.csv')
 
 def getAllEvents():
     '''

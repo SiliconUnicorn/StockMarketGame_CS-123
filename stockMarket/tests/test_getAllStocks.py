@@ -16,7 +16,7 @@ def runTests():
 def test_getStocks():
     '''Tests the getStocks function.'''
     print("Testing getStocks")
-    assert importCSV('../../assets/csv/stocks.csv') == getStocks()
+    assert importCSV('../assets/csv/stocks.csv') == getStocks()
     print("Testing successful.")
 
 def test_getAllStocks():

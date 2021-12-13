@@ -16,7 +16,7 @@ def runTests():
 def test_getEvents():
     '''Tests the getEvents function.'''
     print("Testing getEvents")
-    assert importCSV('../../assets/csv/events.csv') == getEvents()
+    assert importCSV('../assets/csv/events.csv') == getEvents()
     print("Testing successful.")
 
 def test_getAllEvents():

@@ -33,4 +33,4 @@ def getStocks():
     Gets all of the stock information, in a dictionary format
     returns: The stock information!
     '''
-    return importCSV('../../assets/csv/stocks.csv')
+    return importCSV('../assets/csv/stocks.csv')
