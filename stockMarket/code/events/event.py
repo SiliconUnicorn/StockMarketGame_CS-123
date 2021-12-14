@@ -46,3 +46,9 @@ class Event:
             return Event(finalCompany.name + ' Struggling', 'Sources indicate that ' + finalCompany.name + ' is struggling to pay its debts.', finalCompany.name, randomValue)
         else:
             assert 0 == 1
+#
+# if __name__ == "__main__":
+#     print("Beginning Test")
+#     event = Event("Test", "Someone tests an event", "None", 0.04)
+#     print(event.generateDynamicEvent().detail)
+#     print("Check dynamic result manually.")
