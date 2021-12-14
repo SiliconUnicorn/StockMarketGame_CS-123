@@ -31,9 +31,12 @@ class Portfolio:
 
     def confirmUserPurchasable(self, stock, shares):
         '''
-        Checks to see whether or not a user has enough cash to make a stock purchase, and returns True if it does work
+        Checks to see whether or not a user has enough cash to make a stock purchase, and returns True if it does work. Also checks to see if stocks can be sold.
         '''
-        return self.userCash > shares * stock.currentValue
+        if shares >= 0:
+            return self.userCash > shares * stock.currentValue
+        else:
+            return shares*-1 <= self.ownedStocks[stock.name]
 
 
     def changeStock(self, stock, shares):

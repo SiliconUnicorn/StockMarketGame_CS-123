@@ -22,8 +22,6 @@ class GameGUI:
         self.helpResponse = None
         self.rootWin = tk.Tk()
         self.rootWin.title("Stock Market Game")
-        stocks = getAllStocks()
-        events = getAllEvents()
         self.portfolio = Portfolio()
         self.market = StockMarket()
 
@@ -97,7 +95,7 @@ class GameGUI:
 
     def sellResponse(self, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
         """makes it so when you click sell the number of shares goes down but doesn't allow it to go past zero """
-        if self.portfolio.ownedStocks[stock_name] > 0:
+        if self.portfolio.confirmUserPurchasable(self.market.getCurrentDictionary()[stock_name], self.stockChangeValue*-1):
             self.portfolio.changeStock(self.market.getCurrentDictionary()[stock_name], -1*self.stockChangeValue)
             numSharesLabl["text"] = str(self.portfolio.ownedStocks[stock_name])
             totalValLabl["text"] = str(float(int((self.portfolio.ownedStocks[stock_name] * self.market.getCurrentDictionary()[stock_name].currentValue)*100))/100)
@@ -159,8 +157,8 @@ class GameGUI:
         '''Begins the next turn of the game.'''
         self.currentTurnNumber += 1
 
-        self.market.updateEvents()
         self.market.updateStocks()
+        self.market.updateEvents()
 
         self.performStockInterfaceLayout()
 
