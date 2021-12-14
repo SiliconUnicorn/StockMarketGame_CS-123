@@ -20,7 +20,7 @@ class Stock:
         '''Performs changes neccessary to update a stock'''
         marketChange = marketValue + categoryValue + additionalValue + float(random.randint(0,2))/100
         self.valueHistory.append(self.currentValue)
-        self.currentValue = float(int((self.currentValue + marketChange)*100))/100
+        self.currentValue = float(int((self.currentValue + marketChange*self.currentValue)*100))/100
 
 # if __name__ == "__main__":
 #     '''Tests the Stock class'''
