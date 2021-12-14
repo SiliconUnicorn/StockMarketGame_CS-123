@@ -31,8 +31,19 @@ class GameGUI:
 
         self.currentTurnNumber = 0
 
+        self.stockChangeValue = 1
+
+        self.stockChangePlusButton = tk.Button(self.rootWin, command=self.increaseButtonClicked, text="+")
+        self.stockChangePlusButton.grid(row=2, column=6)
+
+        self.stockChangeMinusButton = tk.Button(self.rootWin, command=self.decreaseButtonClicked, text='-')
+        self.stockChangeMinusButton.grid(row=2, column=8)
+
+        self.changeLabel = tk.Label(self.rootWin, text=1)
+        self.changeLabel.grid(row=2,column=7)
+
         self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
-        self.eventText.grid(row=1, column=8)
+        self.eventText.grid(row=1, column=9)
         self.eventText.insert(1.0, "Current Year: " + str(self.getCurrentYear()) + '\t\tUser Cash: $' + str(
             self.portfolio.userCash) + '\t\tUser Net Worth: $' + str(self.portfolio.getCashValue(self.market.stocks)) +
                               '\n\n' + self.market.currentEvents[0].name + ": " + self.market.currentEvents[
@@ -64,10 +75,21 @@ class GameGUI:
         helpButton["fg"] = "black"
         helpButton.grid(row=0, column=10, padx=5, pady=0)
 
+    def increaseButtonClicked(self):
+        '''Called when the increase button is clicked'''
+        self.stockChangeValue += 1
+        self.changeLabel['text'] = str(self.stockChangeValue)
+
+    def decreaseButtonClicked(self):
+        '''Called when the increase button is clicked'''
+        if self.stockChangeValue > 0:
+            self.stockChangeValue -= 1
+        self.changeLabel['text'] = str(self.stockChangeValue)
+
     def buyResponse(self, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
         """ makes it so when you click the buy button the number of shares goes up"""
-        if self.portfolio.confirmUserPurchasable(self.market.getCurrentDictionary()[stock_name], 1):
-            self.portfolio.changeStock(self.market.getCurrentDictionary()[stock_name], 1)
+        if self.portfolio.confirmUserPurchasable(self.market.getCurrentDictionary()[stock_name], self.stockChangeValue):
+            self.portfolio.changeStock(self.market.getCurrentDictionary()[stock_name], self.stockChangeValue)
             numSharesLabl["text"] = str(self.portfolio.ownedStocks[stock_name])
             totalValLabl["text"] = str(float(int((self.portfolio.ownedStocks[stock_name] * self.market.getCurrentDictionary()[stock_name].currentValue)*100))/100)
             self.updateEventText()
@@ -76,7 +98,7 @@ class GameGUI:
     def sellResponse(self, stock_name, numSharesLabl, shareValueLabl, totalValLabl):
         """makes it so when you click sell the number of shares goes down but doesn't allow it to go past zero """
         if self.portfolio.ownedStocks[stock_name] > 0:
-            self.portfolio.changeStock(self.market.getCurrentDictionary()[stock_name], -1)
+            self.portfolio.changeStock(self.market.getCurrentDictionary()[stock_name], -1*self.stockChangeValue)
             numSharesLabl["text"] = str(self.portfolio.ownedStocks[stock_name])
             totalValLabl["text"] = str(float(int((self.portfolio.ownedStocks[stock_name] * self.market.getCurrentDictionary()[stock_name].currentValue)*100))/100)
             self.updateEventText()
@@ -115,14 +137,14 @@ class GameGUI:
             sellButton["font"] = "Arial 12"
             sellButton["bg"] = "#e8b6f9"
             sellButton["fg"] = "black"
-            sellButton.grid(row=row, column=7)
+            sellButton.grid(row=row, column=8)
 
             row += 1
 
     def updateEventText(self):
         '''Updates the event text display, to reflect new information'''
         self.eventText = sTk.ScrolledText(self.rootWin, font="Helvetica", wrap=tk.WORD)
-        self.eventText.grid(row=1, column=8)
+        self.eventText.grid(row=1, column=9)
         self.eventText.insert(1.0, "Current Year: " + str(self.getCurrentYear()) + '\t\tUser Cash: $' + str(
             self.portfolio.userCash) + '\t\tUser Net Worth: $' + str(self.portfolio.getCashValue(self.market.stocks)) +
                               '\n\n' + self.market.currentEvents[0].name + ": " + self.market.currentEvents[

@@ -23,9 +23,9 @@ class StockMarket:
     def updateStocks(self):
         """Decides whether the stock will change according to the events in the game, and makes the corresponding change to value."""
         stockChanges = {}
-        marketChange = float(random.randint(-2, 6))/100
+        marketChange = float(random.randint(-1, 9))/100
         for stock in self.stocks:
-            stockChanges[stock.category] = float(random.randint(-1, 5))/100
+            stockChanges[stock.category] = float(random.randint(-1, 7))/100
             if self.currentEvents[0].category == stock.category or self.currentEvents[0].category == 'All':
                 stockChanges[stock.category] += float(self.currentEvents[0].effect)
             if self.currentEvents[1].category == stock.category or self.currentEvents[1].category == 'All':
